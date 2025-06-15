@@ -1,0 +1,16 @@
+{% extends 'base.html' %}
+
+{% block content %}
+<section class="py-5">
+    <div class="container">
+        <div class="row justify-content-center">
+            <div class="col-lg-8 text-center">
+                <h1 class="display-1 fw-bold text-primary mb-4">404</h1>
+                <h2 class="display-4 fw-bold mb-4">Страница не найдена</h2>
+                <p class="lead mb-4">Извините, запрашиваемая страница не существует или была перемещена.</p>
+                <a href="{% url 'core:home' %}" class="btn btn-primary btn-lg">Вернуться на главную</a>
+            </div>
+        </div>
+    </div>
+</section>
+{% endblock %} 

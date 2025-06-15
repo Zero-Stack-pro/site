@@ -1,0 +1,133 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block content %}
+<div class="container py-5">
+    <div class="row">
+        <!-- Галерея изображений -->
+        <div class="col-lg-6 mb-4">
+            {% if product.images.exists %}
+            <div id="productCarousel" class="carousel slide" data-bs-ride="carousel">
+                <div class="carousel-inner">
+                    {% for image in product.images.all %}
+                    <div class="carousel-item {% if image.is_main or forloop.first %}active{% endif %}">
+                        <img src="{{ image.image.url }}" class="d-block w-100 rounded" alt="{{ image.title }}">
+                        {% if image.title or image.description %}
+                        <div class="carousel-caption d-none d-md-block bg-dark bg-opacity-50 rounded">
+                            {% if image.title %}
+                            <h5>{{ image.title }}</h5>
+                            {% endif %}
+                            {% if image.description %}
+                            <p>{{ image.description }}</p>
+                            {% endif %}
+                        </div>
+                        {% endif %}
+                    </div>
+                    {% endfor %}
+                </div>
+                {% if product.images.count > 1 %}
+                <button class="carousel-control-prev" type="button" data-bs-target="#productCarousel" data-bs-slide="prev">
+                    <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+                    <span class="visually-hidden">Предыдущее</span>
+                </button>
+                <button class="carousel-control-next" type="button" data-bs-target="#productCarousel" data-bs-slide="next">
+                    <span class="carousel-control-next-icon" aria-hidden="true"></span>
+                    <span class="visually-hidden">Следующее</span>
+                </button>
+                {% endif %}
+            </div>
+            {% else %}
+            <div class="text-center py-5 bg-light rounded">
+                <i class="bi bi-image text-muted" style="font-size: 4rem;"></i>
+                <p class="mt-3 text-muted">Изображения отсутствуют</p>
+            </div>
+            {% endif %}
+        </div>
+
+        <!-- Информация о продукте -->
+        <div class="col-lg-6">
+            <div class="d-flex justify-content-between align-items-start mb-4">
+                <h1 class="display-4 mb-0">{{ product.title }}</h1>
+                {% if product.is_new %}
+                <span class="badge bg-success fs-6">Новинка</span>
+                {% endif %}
+            </div>
+            <div class="mb-4">
+                {{ product.description|linebreaks }}
+            </div>
+
+            <!-- Возможности -->
+            <div class="mb-4">
+                <h3 class="h4 mb-3">Возможности</h3>
+                <ul class="list-unstyled">
+                    {% for feature in product.features %}
+                    <li class="mb-2">
+                        <i class="bi bi-check-circle-fill text-primary me-2"></i>
+                        {{ feature }}
+                    </li>
+                    {% endfor %}
+                </ul>
+            </div>
+
+            <!-- Технические характеристики -->
+            <div class="mb-4">
+                <h3 class="h4 mb-3">Технические характеристики</h3>
+                <div class="table-responsive">
+                    <table class="table">
+                        <tbody>
+                            {% for key, value in product.specifications.items %}
+                            <tr>
+                                <th scope="row">{{ key }}</th>
+                                <td>{{ value }}</td>
+                            </tr>
+                            {% endfor %}
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Связанные продукты -->
+    {% if related_products %}
+    <div class="mt-5">
+        <h2 class="display-5 mb-4">Связанные продукты</h2>
+        <div class="row g-4">
+            {% for related in related_products %}
+            <div class="col-md-4">
+                <div class="card h-100">
+                    {% with main_image=related.images.all|first %}
+                    {% if main_image %}
+                    <img src="{{ main_image.image.url }}" class="card-img-top" alt="{{ main_image.title }}">
+                    {% else %}
+                    <div class="card-img-top bg-light text-center py-5">
+                        <i class="bi bi-image text-muted" style="font-size: 3rem;"></i>
+                    </div>
+                    {% endif %}
+                    {% endwith %}
+                    <div class="card-body">
+                        <div class="d-flex justify-content-between align-items-start mb-2">
+                            <h3 class="h5 mb-0">
+                                <a href="{{ related.get_absolute_url }}" class="text-decoration-none">
+                                    {{ related.title }}
+                                </a>
+                            </h3>
+                            {% if related.is_new %}
+                            <span class="badge bg-success">Новинка</span>
+                            {% endif %}
+                        </div>
+                        <p class="text-muted">{{ related.description|truncatechars:150 }}</p>
+                    </div>
+                    <div class="card-footer bg-transparent border-0">
+                        <a href="{{ related.get_absolute_url }}" class="btn btn-primary w-100">
+                            Подробнее
+                        </a>
+                    </div>
+                </div>
+            </div>
+            {% endfor %}
+        </div>
+    </div>
+    {% endif %}
+</div>
+{% endblock %} 

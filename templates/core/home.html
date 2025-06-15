@@ -1,0 +1,174 @@
+{% extends 'base.html' %}
+
+{% block content %}
+<!-- Hero Section -->
+<section class="hero-section">
+    <div class="container">
+        <div class="row align-items-center">
+            <div class="col-lg-6">
+                <h1 class="display-3 fw-bold mb-4 animate-fade-in">ZeroStack</h1>
+                <p class="lead mb-4 animate-fade-in" style="animation-delay: 0.2s">
+                    Инновационные решения для автоматизации и оптимизации промышленных процессов
+                </p>
+
+            </div>
+
+        </div>
+    </div>
+</section>
+
+<!-- Latest Products -->
+<section class="py-5">
+    <div class="container">
+        <div class="d-flex justify-content-between align-items-center mb-4">
+            <h2 class="display-5">Свежие проекты</h2>
+            <a href="{% url 'core:products' %}" class="btn btn-outline-primary">Все проекты</a>
+        </div>
+        <div class="row g-4">
+            {% for product in latest_products %}
+            <div class="col-md-4">
+                <div class="card h-100">
+                    {% with main_image=product.images.all|first %}
+                    {% if main_image %}
+                    <img src="{{ main_image.image.url }}" class="card-img-top" alt="{{ main_image.title }}">
+                    {% else %}
+                    <div class="card-img-top bg-light text-center py-5">
+                        <i class="bi bi-image text-muted" style="font-size: 3rem;"></i>
+                    </div>
+                    {% endif %}
+                    {% endwith %}
+                    <div class="card-body">
+                        <div class="d-flex justify-content-between align-items-start mb-2">
+                            <h3 class="h5 mb-0">
+                                <a href="{{ product.get_absolute_url }}" class="text-decoration-none">
+                                    {{ product.title }}
+                                </a>
+                            </h3>
+                            {% if product.is_new %}
+                            <span class="badge bg-success">Новинка</span>
+                            {% endif %}
+                        </div>
+                        <p class="text-muted">{{ product.description|truncatechars:150 }}</p>
+                    </div>
+                    <div class="card-footer bg-transparent border-0">
+                        <a href="{{ product.get_absolute_url }}" class="btn btn-primary w-100">
+                            Подробнее
+                        </a>
+                    </div>
+                </div>
+            </div>
+            {% endfor %}
+        </div>
+    </div>
+</section>
+
+<!-- Latest Articles -->
+<section class="py-5 bg-light">
+    <div class="container">
+        <div class="text-center mb-5">
+            <h2 class="display-5 fw-bold">Обновления знаний</h2>
+            <p class="lead text-muted">Новые материалы из нашей базы знаний</p>
+        </div>
+        <div class="row g-4">
+            {% for article in latest_articles %}
+            <div class="col-md-4">
+                <div class="card h-100">
+                    <div class="card-body">
+                        <h3 class="h4 mb-3">
+                            <a href="{% url 'core:learning_detail' article.slug %}" class="text-decoration-none">
+                                {{ article.title }}
+                            </a>
+                        </h3>
+                        {% if article.excerpt %}
+                        <p class="text-muted mb-3">{{ article.excerpt }}</p>
+                        {% endif %}
+                        <div class="d-flex justify-content-between align-items-center">
+                            <small class="text-muted">{{ article.created_at|date:"d.m.Y" }}</small>
+                            <a href="{% url 'core:learning_detail' article.slug %}" class="btn btn-outline-primary btn-sm">
+                                Читать далее
+                            </a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            {% empty %}
+            <div class="col-12 text-center">
+                <p class="lead text-muted">Статьи пока не добавлены</p>
+            </div>
+            {% endfor %}
+        </div>
+        <div class="text-center mt-5">
+            <a href="{% url 'core:learning' %}" class="btn btn-primary btn-lg">Все статьи</a>
+        </div>
+    </div>
+</section>
+
+<!-- Features Section -->
+<section class="py-5">
+    <div class="container">
+        <div class="text-center mb-5">
+            <h2 class="display-5 fw-bold">Почему выбирают нас</h2>
+            <p class="lead text-muted">Преимущества работы с ZeroStack</p>
+        </div>
+        <div class="row g-4">
+            <div class="col-md-6 col-lg-3">
+                <div class="card h-100">
+                    <div class="card-body text-center">
+                        <div class="feature-icon mx-auto mb-4">
+                            <i class="bi bi-speedometer2"></i>
+                        </div>
+                        <h3 class="h4 mb-3">Производительность</h3>
+                        <p class="text-muted">Оптимизация и ускорение производственных процессов</p>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-6 col-lg-3">
+                <div class="card h-100">
+                    <div class="card-body text-center">
+                        <div class="feature-icon mx-auto mb-4">
+                            <i class="bi bi-shield-check"></i>
+                        </div>
+                        <h3 class="h4 mb-3">Надежность</h3>
+                        <p class="text-muted">Стабильная работа и защита данных</p>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-6 col-lg-3">
+                <div class="card h-100">
+                    <div class="card-body text-center">
+                        <div class="feature-icon mx-auto mb-4">
+                            <i class="bi bi-currency-dollar"></i>
+                        </div>
+                        <h3 class="h4 mb-3">Экономия</h3>
+                        <p class="text-muted">Снижение затрат и повышение эффективности</p>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-6 col-lg-3">
+                <div class="card h-100">
+                    <div class="card-body text-center">
+                        <div class="feature-icon mx-auto mb-4">
+                            <i class="bi bi-gear"></i>
+                        </div>
+                        <h3 class="h4 mb-3">Гибкость</h3>
+                        <p class="text-muted">Адаптация под ваши потребности</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- Call to Action -->
+<section class="py-5">
+    <div class="container">
+        <div class="row justify-content-center">
+            <div class="col-lg-8 text-center">
+                <h2 class="display-5 fw-bold mb-4">Готовы начать?</h2>
+                <p class="lead mb-4">Свяжитесь с нами для обсуждения вашего проекта</p>
+                <a href="{% url 'core:contact' %}" class="btn btn-primary btn-lg">Связаться с нами</a>
+            </div>
+        </div>
+    </div>
+</section>
+{% endblock %} 

@@ -1,0 +1,506 @@
+/* Custom styles for ZeroStack website */
+
+/* Общие стили */
+:root {
+    --transition-speed: 0.3s;
+    --navbar-bg: #ffffff;
+    --footer-bg: #f8f9fa;
+}
+
+[data-bs-theme="dark"] {
+    --navbar-bg: #212529;
+    --footer-bg: #212529;
+}
+
+body {
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+    transition: background-color var(--transition-speed), color var(--transition-speed);
+}
+
+/* Hero section */
+.hero-section {
+    padding: 6rem 0;
+    background-color: var(--bs-body-bg);
+    position: relative;
+    overflow: hidden;
+}
+
+.hero-section::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: radial-gradient(circle at 50% 50%, rgba(255, 255, 255, 0.03) 0%, transparent 70%);
+    pointer-events: none;
+}
+
+.hero-section .display-3 {
+    color: var(--bs-body-color);
+    text-shadow: 0 2px 4px rgba(0, 0, 0, 0.3);
+}
+
+.hero-section .lead {
+    color: var(--bs-body-color);
+    opacity: 0.9;
+    font-size: 1.25rem;
+    line-height: 1.6;
+}
+
+.hero-image {
+    position: relative;
+    padding: 1rem;
+}
+
+.hero-image::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: var(--bs-primary);
+    opacity: 0.03;
+    border-radius: 0.5rem;
+    z-index: 0;
+}
+
+.hero-image img {
+    position: relative;
+    z-index: 1;
+    transition: transform 0.3s ease;
+}
+
+.hero-image:hover img {
+    transform: scale(1.02);
+}
+
+/* Dark theme specific styles */
+[data-bs-theme="dark"] .hero-section {
+    background-color: #1a1a1a;
+}
+
+/* Responsive adjustments */
+@media (max-width: 991.98px) {
+    .hero-section {
+        padding: 4rem 0;
+        text-align: center;
+    }
+    
+    .hero-section .display-3 {
+        font-size: 2.5rem;
+    }
+    
+    .hero-section .lead {
+        font-size: 1.1rem;
+    }
+}
+
+/* Стили для навигации */
+.navbar {
+    background-color: var(--navbar-bg) !important;
+    transition: background-color var(--transition-speed), border-color var(--transition-speed);
+    border-bottom: 1px solid var(--bs-border-color);
+}
+
+.navbar-brand {
+    font-weight: 600;
+    color: var(--bs-body-color) !important;
+}
+
+.nav-link {
+    position: relative;
+    padding: 0.5rem 1rem;
+    color: var(--bs-body-color) !important;
+    transition: color var(--transition-speed);
+}
+
+.nav-link:hover {
+    color: var(--bs-primary) !important;
+}
+
+.nav-link::after {
+    content: '';
+    position: absolute;
+    bottom: 0;
+    left: 50%;
+    width: 0;
+    height: 2px;
+    background-color: var(--bs-primary);
+    transition: all var(--transition-speed);
+    transform: translateX(-50%);
+}
+
+.nav-link:hover::after,
+.nav-link.active::after {
+    width: 100%;
+}
+
+.nav-link.active {
+    color: var(--bs-primary) !important;
+}
+
+/* Стили для кнопки переключения темы */
+#themeToggle {
+    padding: 0.5rem;
+    border-radius: 50%;
+    transition: background-color var(--transition-speed);
+    color: var(--bs-body-color) !important;
+}
+
+#themeToggle:hover {
+    background-color: var(--bs-gray-200);
+}
+
+[data-bs-theme="dark"] #themeToggle:hover {
+    background-color: var(--bs-gray-700);
+}
+
+/* Стили для футера */
+footer {
+    background-color: var(--footer-bg) !important;
+    color: var(--bs-body-color);
+    transition: background-color var(--transition-speed), color var(--transition-speed), border-color var(--transition-speed);
+    border-top: 1px solid var(--bs-border-color);
+    margin-top: auto;
+}
+
+footer h5 {
+    color: var(--bs-body-color);
+    font-weight: 600;
+    margin-bottom: 1rem;
+}
+
+footer p {
+    color: var(--bs-secondary-color);
+    margin-bottom: 0.5rem;
+}
+
+footer a {
+    color: var(--bs-body-color);
+    text-decoration: none;
+    transition: color var(--transition-speed);
+}
+
+footer a:hover {
+    color: var(--bs-primary);
+}
+
+.social-links a {
+    font-size: 1.25rem;
+    margin-right: 1rem;
+}
+
+/* Стили для карточек */
+.card {
+    transition: transform var(--transition-speed), box-shadow var(--transition-speed), background-color var(--transition-speed), border-color var(--transition-speed);
+    border: 1px solid var(--bs-border-color);
+    background-color: var(--bs-body-bg);
+}
+
+.card:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+}
+
+.card-body {
+    color: var(--bs-body-color);
+}
+
+/* Стили для иконок */
+.feature-icon {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    width: 4rem;
+    height: 4rem;
+    border-radius: 0.75rem;
+    background-color: var(--bs-primary);
+    color: white;
+    font-size: 2rem;
+}
+
+/* Стили для текста */
+.text-muted {
+    color: var(--bs-secondary-color) !important;
+}
+
+/* Стили для секций */
+section {
+    background-color: var(--bs-body-bg);
+    color: var(--bs-body-color);
+    transition: background-color var(--transition-speed), color var(--transition-speed);
+}
+
+section.bg-light {
+    background-color: var(--bs-light) !important;
+}
+
+[data-bs-theme="dark"] section.bg-light {
+    background-color: var(--bs-dark) !important;
+}
+
+/* Анимации */
+.animate-fade-in {
+    animation: fadeIn 0.5s ease-in;
+}
+
+@keyframes fadeIn {
+    from {
+        opacity: 0;
+        transform: translateY(20px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+/* Адаптивные стили */
+@media (max-width: 768px) {
+    .navbar-nav {
+        padding: 1rem 0;
+    }
+    
+    .nav-link {
+        padding: 0.5rem 0;
+    }
+    
+    footer {
+        text-align: center;
+    }
+    
+    .social-links {
+        justify-content: center;
+        margin-top: 1rem;
+    }
+}
+
+/* Дополнительные стили для темной темы */
+[data-bs-theme="dark"] {
+    --bs-body-bg: #212529;
+    --bs-body-color: #f8f9fa;
+    --bs-border-color: #495057;
+    --bs-secondary-color: #adb5bd;
+}
+
+[data-bs-theme="dark"] .card {
+    background-color: #2c3034;
+}
+
+[data-bs-theme="dark"] .navbar {
+    background-color: var(--navbar-bg) !important;
+}
+
+[data-bs-theme="dark"] footer {
+    background-color: var(--footer-bg) !important;
+}
+
+[data-bs-theme="dark"] .hero-section {
+    background-color: #212529;
+}
+
+/* Стили для кнопок */
+.btn-primary {
+    background-color: var(--bs-primary);
+    border-color: var(--bs-primary);
+    color: white;
+}
+
+.btn-primary:hover {
+    background-color: var(--bs-primary-dark);
+    border-color: var(--bs-primary-dark);
+}
+
+/* Стили для списков */
+.list-unstyled li {
+    color: var(--bs-body-color);
+}
+
+/* Стили для заголовков */
+h1, h2, h3, h4, h5, h6 {
+    color: var(--bs-body-color);
+}
+
+/* Custom button styles */
+.btn-primary {
+    background-color: #0d6efd;
+    border-color: #0d6efd;
+    padding: 0.5rem 1.5rem;
+}
+
+.btn-primary:hover {
+    background-color: #0b5ed7;
+    border-color: #0a58ca;
+}
+
+.social-links a {
+    font-size: 1.5rem;
+    transition: color 0.3s ease;
+}
+
+.social-links a:hover {
+    color: #0d6efd !important;
+}
+
+/* Contact form styles */
+.form-control:focus {
+    border-color: #0d6efd;
+    box-shadow: 0 0 0 0.25rem rgba(13, 110, 253, 0.25);
+}
+
+/* Responsive adjustments */
+@media (max-width: 768px) {
+    .hero-section {
+        padding: 2rem 0;
+    }
+    
+    .display-4 {
+        font-size: 2.5rem;
+    }
+}
+
+/* Article Styles */
+.article-content {
+    font-size: 1.1rem;
+    line-height: 1.8;
+}
+
+.article-content h1,
+.article-content h2,
+.article-content h3,
+.article-content h4,
+.article-content h5,
+.article-content h6 {
+    margin-top: 2rem;
+    margin-bottom: 1rem;
+    font-weight: 600;
+}
+
+.article-content p {
+    margin-bottom: 1.5rem;
+}
+
+.article-content img {
+    max-width: 100%;
+    height: auto;
+    border-radius: 0.5rem;
+    margin: 2rem 0;
+}
+
+.article-content pre {
+    background-color: var(--bs-light);
+    padding: 1rem;
+    border-radius: 0.5rem;
+    overflow-x: auto;
+    margin: 1.5rem 0;
+}
+
+.article-content code {
+    background-color: var(--bs-light);
+    padding: 0.2rem 0.4rem;
+    border-radius: 0.3rem;
+    font-size: 0.9em;
+}
+
+.article-content blockquote {
+    border-left: 4px solid var(--bs-primary);
+    padding-left: 1rem;
+    margin: 1.5rem 0;
+    color: var(--bs-gray-600);
+}
+
+.article-content ul,
+.article-content ol {
+    margin-bottom: 1.5rem;
+    padding-left: 2rem;
+}
+
+.article-content li {
+    margin-bottom: 0.5rem;
+}
+
+.article-content table {
+    width: 100%;
+    margin-bottom: 1.5rem;
+    border-collapse: collapse;
+}
+
+.article-content th,
+.article-content td {
+    padding: 0.75rem;
+    border: 1px solid var(--bs-gray-300);
+}
+
+.article-content th {
+    background-color: var(--bs-light);
+    font-weight: 600;
+}
+
+/* Dark theme adjustments */
+[data-bs-theme="dark"] .article-content pre,
+[data-bs-theme="dark"] .article-content code {
+    background-color: var(--bs-dark);
+}
+
+[data-bs-theme="dark"] .article-content th {
+    background-color: var(--bs-dark);
+}
+
+[data-bs-theme="dark"] .article-content th,
+[data-bs-theme="dark"] .article-content td {
+    border-color: var(--bs-gray-700);
+}
+
+[data-bs-theme="dark"] .article-content blockquote {
+    border-left-color: var(--bs-primary);
+    color: var(--bs-gray-400);
+}
+
+/* Footer */
+.footer {
+    background-color: var(--bs-body-bg);
+    border-top: 1px solid var(--bs-border-color);
+    padding: 3rem 0;
+    margin-top: 3rem;
+}
+
+.footer h5 {
+    color: var(--bs-body-color);
+    margin-bottom: 1.5rem;
+    font-weight: 600;
+}
+
+.footer p,
+.footer li,
+.footer .text-body {
+    color: var(--bs-body-color) !important;
+    opacity: 0.8;
+}
+
+.footer .social-links a {
+    color: var(--bs-body-color) !important;
+    opacity: 0.8;
+    transition: opacity 0.3s ease;
+    font-size: 1.25rem;
+}
+
+.footer .social-links a:hover {
+    opacity: 1;
+}
+
+.footer .list-unstyled li {
+    margin-bottom: 0.5rem;
+}
+
+.footer .copyright {
+    border-top: 1px solid var(--bs-border-color);
+    margin-top: 2rem;
+    padding-top: 2rem;
+    text-align: center;
+    color: var(--bs-body-color) !important;
+    opacity: 0.8;
+} 

@@ -1,0 +1,71 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block content %}
+<div class="container py-5">
+    <div class="row">
+        <div class="col-lg-6 mb-4 mb-lg-0">
+            <h1 class="display-4 mb-4">Свяжитесь с нами</h1>
+            <p class="lead mb-4">Мы готовы ответить на все ваши вопросы и помочь с выбором оптимального решения для вашего бизнеса.</p>
+            
+            <div class="contact-info">
+                <div class="d-flex align-items-center mb-3">
+                    <i class="bi bi-geo-alt-fill text-primary me-3" style="font-size: 1.5rem;"></i>
+                    <div>
+                        <h5 class="mb-1">Адрес</h5>
+                        <p class="mb-0">г. Темрюк, Краснодарский край</p>
+                    </div>
+                </div>
+                
+                <div class="d-flex align-items-center mb-3">
+                    <i class="bi bi-telephone-fill text-primary me-3" style="font-size: 1.5rem;"></i>
+                    <div>
+                        <h5 class="mb-1">Телефон</h5>
+                        <p class="mb-0">
+                            <a href="tel:+79960503333" class="text-decoration-none">8 (996) 050-33-33</a>
+                        </p>
+                    </div>
+                </div>
+                
+                <div class="d-flex align-items-center">
+                    <i class="bi bi-envelope-fill text-primary me-3" style="font-size: 1.5rem;"></i>
+                    <div>
+                        <h5 class="mb-1">Email</h5>
+                        <p class="mb-0">
+                            <a href="mailto:info@zerostack.ru" class="text-decoration-none">info@zerostack.ru</a>
+                        </p>
+                    </div>
+                </div>
+            </div>
+        </div>
+        
+        <div class="col-lg-6">
+            <div class="card shadow-sm">
+                <div class="card-body p-4">
+                    <h2 class="h4 mb-4">Отправить сообщение</h2>
+                    <form method="post">
+                        {% csrf_token %}
+                        <div class="mb-3">
+                            <label for="id_name" class="form-label">Ваше имя</label>
+                            <input type="text" name="name" id="id_name" class="form-control" required>
+                        </div>
+                        <div class="mb-3">
+                            <label for="id_email" class="form-label">Email</label>
+                            <input type="email" name="email" id="id_email" class="form-control" required>
+                        </div>
+                        <div class="mb-3">
+                            <label for="id_phone" class="form-label">Телефон</label>
+                            <input type="tel" name="phone" id="id_phone" class="form-control" required>
+                        </div>
+                        <div class="mb-3">
+                            <label for="id_message" class="form-label">Сообщение</label>
+                            <textarea name="message" id="id_message" class="form-control" rows="4" required></textarea>
+                        </div>
+                        <button type="submit" class="btn btn-primary">Отправить</button>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %} 
