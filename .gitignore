@@ -30,15 +30,19 @@ staticfiles/
 
 # Virtual Environment
 venv/
-env/
 ENV/
+env/
+.env
 
 # IDE
 .idea/
 .vscode/
 *.swp
 *.swo
-
-# OS
 .DS_Store
-Thumbs.db 
+
+# Project specific
+.env.local
+.env.development.local
+.env.test.local
+.env.production.local 
