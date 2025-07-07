@@ -26,7 +26,7 @@ SECRET_KEY = "django-insecure-your-secret-key-here"
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = ['*']
+ALLOWED_HOSTS = ["*"]
 
 
 # Application definition
@@ -38,13 +38,18 @@ INSTALLED_APPS = [
     "django.contrib.sessions",
     "django.contrib.messages",
     "django.contrib.staticfiles",
+    "django.contrib.sitemaps",
+    "django.contrib.sites",
     "core.apps.CoreConfig",
     "crispy_forms",
     "crispy_bootstrap5",
+    "meta",
+    "robots",
 ]
 
 MIDDLEWARE = [
     "django.middleware.security.SecurityMiddleware",
+    "whitenoise.middleware.WhiteNoiseMiddleware",
     "django.contrib.sessions.middleware.SessionMiddleware",
     "django.middleware.common.CommonMiddleware",
     "django.middleware.csrf.CsrfViewMiddleware",
@@ -133,3 +138,19 @@ DEFAULT_AUTO_FIELD = "django.db.models.BigAutoField"
 
 CRISPY_ALLOWED_TEMPLATE_PACKS = "bootstrap5"
 CRISPY_TEMPLATE_PACK = "bootstrap5"
+
+STATICFILES_STORAGE = "whitenoise.storage.CompressedManifestStaticFilesStorage"
+
+SITE_DOMAIN = "https://zero-stack.pro"
+
+SITE_ID = 1
+
+# Email settings for Yandex (TLS, порт 587)
+EMAIL_BACKEND = "django.core.mail.backends.smtp.EmailBackend"
+EMAIL_HOST = "smtp.yandex.ru"
+EMAIL_PORT = 587
+EMAIL_HOST_USER = "Tnrkip@yandex.ru"
+EMAIL_HOST_PASSWORD = "33423342"
+EMAIL_USE_SSL = False
+EMAIL_USE_TLS = True
+DEFAULT_FROM_EMAIL = "Tnrkip@yandex.ru"

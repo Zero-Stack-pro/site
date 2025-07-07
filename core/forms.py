@@ -12,10 +12,11 @@ class ContactForm(forms.Form):
     email = forms.EmailField(
         label="Email", widget=forms.EmailInput(attrs={"class": "form-control"})
     )
-    subject = forms.CharField(
-        label="Тема",
-        max_length=200,
+    phone = forms.CharField(
+        label="Телефон",
+        max_length=30,
         widget=forms.TextInput(attrs={"class": "form-control"}),
+        required=True,
     )
     message = forms.CharField(
         label="Сообщение",

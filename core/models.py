@@ -1,14 +1,16 @@
 import json
 
+from django.conf import settings
 from django.db import models
 from django.urls import reverse
 from django.utils import timezone
 from django.utils.text import slugify
+from meta.models import ModelMeta
 
 # Create your models here.
 
 
-class Product(models.Model):
+class Product(ModelMeta, models.Model):
     title = models.CharField(max_length=200, verbose_name="Название")
     slug = models.SlugField(max_length=200, unique=True, verbose_name="Slug")
     description = models.TextField(verbose_name="Описание")
@@ -46,6 +48,23 @@ class Product(models.Model):
         if not self.slug:
             self.slug = slugify(self.title)
         super().save(*args, **kwargs)
+
+    def get_meta(self, request=None):
+        image_url = self.images.first().image.url if self.images.exists() else None
+        url = (
+            request.build_absolute_uri(self.get_absolute_url())
+            if request
+            else f"{settings.SITE_DOMAIN}{self.get_absolute_url()}"
+        )
+        return {
+            "title": self.title,
+            "description": self.description[:160],
+            "keywords": [self.title, "промышленная автоматизация", "zerostack"],
+            "image": image_url,
+            "url": url,
+            "og_type": "product",
+            "object_type": "product",
+        }
 
 
 class ProductImage(models.Model):
@@ -103,7 +122,7 @@ class RelatedProduct(models.Model):
         return f"{self.from_product.title} -> {self.to_product.title}"
 
 
-class LearningArticle(models.Model):
+class LearningArticle(ModelMeta, models.Model):
     title = models.CharField(max_length=200, verbose_name="Заголовок")
     slug = models.SlugField(max_length=200, unique=True, verbose_name="URL")
     content = models.TextField(verbose_name="Содержание (Markdown)")
@@ -138,6 +157,22 @@ class LearningArticle(models.Model):
         if not self.slug:
             self.slug = slugify(self.title)
         super().save(*args, **kwargs)
+
+    def get_meta(self, request=None):
+        url = (
+            request.build_absolute_uri(self.get_absolute_url())
+            if request
+            else f"{settings.SITE_DOMAIN}{self.get_absolute_url()}"
+        )
+        return {
+            "title": self.title,
+            "description": self.excerpt or self.content[:160],
+            "keywords": [self.title, "статья", "zerostack"],
+            "image": None,
+            "url": url,
+            "og_type": "article",
+            "object_type": "article",
+        }
 
 
 class Comment(models.Model):

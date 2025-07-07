@@ -14,3 +14,4 @@ urlpatterns = [
     path("learning/", views.LearningArticleListView.as_view(), name="learning"),
     path("learning/<slug:slug>/", views.learning_detail, name="learning_detail"),
 ]
+ 

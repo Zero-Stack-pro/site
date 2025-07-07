@@ -5,11 +5,35 @@
     --transition-speed: 0.3s;
     --navbar-bg: #ffffff;
     --footer-bg: #f8f9fa;
+    --bs-body-bg: #fff;
+    --bs-body-color: #212529;
+    --bs-primary: #0d6efd;
+    --bs-primary-dark: #0b5ed7;
+    --bs-secondary-color: #6c757d;
+    --bs-border-color: #dee2e6;
+    --bs-light: #f8f9fa;
+    --bs-dark: #212529;
+    --bs-gray-200: #e9ecef;
+    --bs-gray-300: #dee2e6;
+    --bs-gray-600: #6c757d;
+    --bs-gray-700: #495057;
 }
 
 [data-bs-theme="dark"] {
     --navbar-bg: #212529;
     --footer-bg: #212529;
+    --bs-body-bg: #212529;
+    --bs-body-color: #f8f9fa;
+    --bs-primary: #0d6efd;
+    --bs-primary-dark: #0a58ca;
+    --bs-secondary-color: #adb5bd;
+    --bs-border-color: #495057;
+    --bs-light: #2c3034;
+    --bs-dark: #181a1b;
+    --bs-gray-200: #343a40;
+    --bs-gray-300: #495057;
+    --bs-gray-600: #adb5bd;
+    --bs-gray-700: #6c757d;
 }
 
 body {
@@ -17,12 +41,15 @@ body {
     display: flex;
     flex-direction: column;
     transition: background-color var(--transition-speed), color var(--transition-speed);
+    background-color: var(--bs-body-bg);
+    color: var(--bs-body-color);
 }
 
 /* Hero section */
 .hero-section {
     padding: 6rem 0;
     background-color: var(--bs-body-bg);
+    color: var(--bs-body-color);
     position: relative;
     overflow: hidden;
 }
@@ -102,6 +129,7 @@ body {
 /* Стили для навигации */
 .navbar {
     background-color: var(--navbar-bg) !important;
+    color: var(--bs-body-color) !important;
     transition: background-color var(--transition-speed), border-color var(--transition-speed);
     border-bottom: 1px solid var(--bs-border-color);
 }
@@ -160,9 +188,9 @@ body {
 }
 
 /* Стили для футера */
-footer {
+footer, .footer {
     background-color: var(--footer-bg) !important;
-    color: var(--bs-body-color);
+    color: var(--bs-body-color) !important;
     transition: background-color var(--transition-speed), color var(--transition-speed), border-color var(--transition-speed);
     border-top: 1px solid var(--bs-border-color);
     margin-top: auto;
@@ -199,6 +227,7 @@ footer a:hover {
     transition: transform var(--transition-speed), box-shadow var(--transition-speed), background-color var(--transition-speed), border-color var(--transition-speed);
     border: 1px solid var(--bs-border-color);
     background-color: var(--bs-body-bg);
+    color: var(--bs-body-color);
 }
 
 .card:hover {
